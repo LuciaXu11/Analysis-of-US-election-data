@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nd.dao.ContLogDao">
+    <!-- 查询献金日志 -->
+    <select id="findContLog" resultType="ContLog">
+        select a.dt,a.state,a.candidate,a.money
+        from st_cand a
+        where a.candidate=#{candidate}
+        and a.dt=#{contDate}
+        order by a.money desc;
+    </select>
+
+    <!-- 查询人数日志 -->
+    <select id="findContAmount" resultType="ContAmount">
+        select b.cand_nm,b.contb_date,b.cand_party,b.cand_amount
+        from cand_support b
+        where b.cand_nm=#{candidate}
+        and b.contb_date=#{contDate}
+    </select>
+
+    <!-- 各职业金额日志 -->
+    <select id="findOccuAmount" resultType="OccuAmountLog">
+        select *
+        from occupation_party
+    </select>
+
+    <!-- 各职业金额日志2 -->
+    <select id="findOccuAmount2" resultType="OccuAmountLog2">
+        select *
+        from occupation_party
+    </select>
+
+</mapper>
